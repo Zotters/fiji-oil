@@ -1,6 +1,6 @@
 
 
-![](https://i.ibb.co/PsKSj3hB/Copilot-20250622-160542.png)  
+![](https://i.ibb.co/YTKXfNVK/Fiji-Oil20.png)  
 *Welcome to the Fiji Oil project. This script is made for FiveM, it was built on the QBX framework. It features a rich configuration and a collection and refining process to oil. This adds a new way for players to earn money on your server while introducing new items that can be used in various ways.*
 
 # WORK IN PROGRESS
