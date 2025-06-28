@@ -23,11 +23,6 @@ Config.ValveOpening = 10000 -- Time it takes to open the valve
 Config.ValveClosing = 600000 -- 10 Minutes allowed for collection
 Config.CollectionIcon = 'caret-right'
 
-Config.Blips = {
-    {x= -40.5, y= -2243.5, z= 8.0}, -- Location of Oil Collection [BLIP ONLY]
-}
-
-
 --[[ ZONES ]] -- 
 Config.OilPumps = { -- These are zones for the pumps.
     vector3(245.5, -2208.0, 8.0),
