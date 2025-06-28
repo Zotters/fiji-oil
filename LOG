@@ -1,0 +1,11 @@
+V0.0.1 -- Fiji Oil Developer Log
+  * Added over 200 lines of code for oil pumps
+    - Featuring - 1 Oil Pump, 1 Target
+                - Animation
+  * Added client side items with images
+  * Added item store for empty oil buckets
+  * Added semi support server side for Oil Collection once valves are opened
+  * Added a timer for closing valves
+V0.0.2 -- Optimization
+  * Reduced pump code to ~82 lines of code
+    -- Added multiple oil pump zones and target zones
