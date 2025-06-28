@@ -9,3 +9,7 @@ V0.0.1 -- Fiji Oil Developer Log
 V0.0.2 -- Optimization
   * Reduced pump code to ~82 lines of code
     -- Added multiple oil pump zones and target zones
+  * Optimized Server side oil collection 
+   -- Added item check for 'empty_oil 
+   -- Added check to see if play can carry the item
+   
