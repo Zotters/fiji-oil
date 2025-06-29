@@ -57,6 +57,22 @@
         stack = false,
         weight = 7500,
     },
+```  
+>*Add this to your shops.lua  
+```lua
+	OilCompany = {
+		name = 'Los Santos Oil',
+		blip = {
+			id = 643, colour = 69, scale = 0.8
+		}, inventory = {
+			{ name = 'empty_oil', price = 35 },
+            { name = 'empty_drum', price = 75 }
+		}, locations = {
+			vec3(-41.36, -2148.09, 11.22) -- Change
+		}, targets = {
+			{ loc = vec3(-41.27, -2148.17, 10.89), length = 0.5, width = 3.0, heading = 270.0, minZ = 30.5, maxZ = 32.0, distance = 3 }
+		}
+	},
 ```
 >* *Add images to the web section of your inventory.*  
 >* *Drop **'fiji-oil'** into server resources*  
