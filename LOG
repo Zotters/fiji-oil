@@ -12,4 +12,8 @@ V0.0.2 -- Optimization
   * Optimized Server side oil collection 
    -- Added item check for 'empty_oil 
    -- Added check to see if play can carry the item
-   
+V0.0.3 -- Expansion
+ * Added an indepth timer to how long the valve stays open
+ * Add randomized collection zones (prevents player congregation) and oil types (heavy and light crude oil).
+ * Increased configuration
+ * Began the refine process
