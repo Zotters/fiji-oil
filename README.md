@@ -58,7 +58,7 @@
         weight = 7500,
     },
 ```  
->*Add this to your shops.lua  
+>*Add this to your shops.lua*  
 ```lua
 	OilCompany = {
 		name = 'Los Santos Oil',
