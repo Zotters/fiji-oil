@@ -1,0 +1,64 @@
+THANK YOU FOR DOWNLOADING ZOTTERS-OIL
+BELOW YOU WILL FIND AN INSTALLATION GUIDE
+---------------------------
+
+1. Drag the ox_inventory into your ox_inventory directory
+2. Add to your items.lua
+          ['empty_oil'] = {
+        label = 'Empty Oil Bucket',
+        stack = true,
+        weight = 150,
+    },
+    ['empty_drum'] = {
+        label = 'Empty Oil Drum',
+        stack = false,
+        weight = 500,
+    },
+    ['full_oil_light'] = {
+        label = 'Light Oil Bucket',
+        stack = false,
+        weight = 1500,
+    },
+    ["full_oil_heavy"] = {
+        label = "Heavy Oil Bucket",
+        weight = 3000,
+        stack = false,
+    },
+    ['refined_light'] = {
+        label = 'Light Crude Oil',
+        stack = false,
+        weight = 1500,
+    },
+    ["refined_heavy"] = {
+        label = "Heavy Crude Oil",
+        weight = 3000,
+        stack = false,
+    },
+    ['oil_drum_light'] = {
+        label = 'Light Oil Drum',
+        stack = false,
+        weight = 7500,
+    },
+    ['oil_drum_heavy'] = {
+        label = 'Heavy Oil Drum',
+        stack = false,
+        weight = 7500,
+    },
+
+3. Add to your shops.lua
+    	OilCompany = {
+		name = 'Los Santos Oil',
+		blip = {
+			id = 643, colour = 69, scale = 0.8
+		}, inventory = {
+			{ name = 'empty_oil', price = 35 },
+            { name = 'empty_drum', price = 75 }
+		}, locations = {
+			vec3(-41.36, -2148.09, 11.22) -- Change
+		}, targets = {
+			{ loc = vec3(-41.27, -2148.17, 10.89), length = 0.5, width = 3.0, heading = 270.0, minZ = 30.5, maxZ = 32.0, distance = 3 }
+		}
+	},
+
+4. Edit config.lua
+5. Ensure fiji-oil
