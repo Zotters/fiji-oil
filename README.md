@@ -7,8 +7,8 @@
 *This is a work in progress! Not all features are available. Available features may not function properly, if you experience issues please share!*
 
 ## Features
-* Open valves on an oil pump to start a stream of oil to main container  
-* Collect Oil from the main container
+* Open valve at pump, oil flows for a certain amount of time.
+* Collect oil from a random collection zone
 * Refine the Oil
 * Sell the Oil
 
@@ -19,18 +19,43 @@
 ```lua
     ['empty_oil'] = {
         label = 'Empty Oil Bucket',
-        stack = false,
+        stack = true,
         weight = 150,
     },
-    ['full_oil'] = {
-        label = 'Oil Bucket',
+    ['empty_drum'] = {
+        label = 'Empty Oil Drum',
         stack = false,
-        weight = 1000,
+        weight = 500,
     },
-    ['oil_drum'] = {
-        label = 'Oil Barrel',
+    ['full_oil_light'] = {
+        label = 'Light Oil Bucket',
         stack = false,
-        weight = 2500,
+        weight = 1500,
+    },
+    ["full_oil_heavy"] = {
+        label = "Heavy Oil Bucket",
+        weight = 3000,
+        stack = false,
+    },
+    ['refined_light'] = {
+        label = 'Light Crude Oil',
+        stack = false,
+        weight = 1500,
+    },
+    ["refined_heavy"] = {
+        label = "Heavy Crude Oil",
+        weight = 3000,
+        stack = false,
+    },
+    ['oil_drum_light'] = {
+        label = 'Light Oil Drum',
+        stack = false,
+        weight = 7500,
+    },
+    ['oil_drum_heavy'] = {
+        label = 'Heavy Oil Drum',
+        stack = false,
+        weight = 7500,
     },
 ```
 >* *Add images to the web section of your inventory.*  
