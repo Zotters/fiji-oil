@@ -7,8 +7,10 @@
 *This is a work in progress! Not all features are available. Available features may not function properly, if you experience issues please share!*
 
 ## Features
-* Open valve at pump, oil flows for a certain amount of time.
-* Collect oil from a random collection zone
+* Open valve at pump, oil flows for a certain amount of time. 
+* Collect oil from a random collection zone -- Once the valve is open a blip will appear on the map
+  > This is on a timer, once the timer expires the blip will be removed and the player will have to reopen the valve.
+* Different oil types
 * Refine the Oil
 * Sell the Oil
 
