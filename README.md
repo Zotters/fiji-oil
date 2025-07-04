@@ -19,47 +19,8 @@
 ## Installation
 >*Add these to your inventory items.lua*
 ```lua
-    ['empty_oil'] = {
-        label = 'Empty Oil Bucket',
-        stack = true,
-        weight = 150,
-    },
-    ['empty_drum'] = {
-        label = 'Empty Oil Drum',
-        stack = false,
-        weight = 500,
-    },
-    ['full_oil_light'] = {
-        label = 'Light Oil Bucket',
-        stack = false,
-        weight = 1500,
-    },
-    ["full_oil_heavy"] = {
-        label = "Heavy Oil Bucket",
-        weight = 3000,
-        stack = false,
-    },
-    ['refined_light'] = {
-        label = 'Light Crude Oil',
-        stack = false,
-        weight = 1500,
-    },
-    ["refined_heavy"] = {
-        label = "Heavy Crude Oil",
-        weight = 3000,
-        stack = false,
-    },
-    ['oil_drum_light'] = {
-        label = 'Light Oil Drum',
-        stack = false,
-        weight = 7500,
-    },
-    ['oil_drum_heavy'] = {
-        label = 'Heavy Oil Drum',
-        stack = false,
-        weight = 7500,
-    },
-```  
+itemsFoundIn = INSTALLATION.INFO
+```
 >*Add this to your shops.lua*  
 ```lua
 	OilCompany = {
