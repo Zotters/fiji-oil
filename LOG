@@ -1,31 +1,12 @@
-V0.0.1 -- Fiji Oil Developer Log
-  * Added over 200 lines of code for oil pumps
-    - Featuring - 1 Oil Pump, 1 Target
-                - Animation
-  * Added client side items with images
-  * Added item store for empty oil buckets
-  * Added semi support server side for Oil Collection once valves are opened
-  * Added a timer for closing valves
-V0.0.2 -- Optimization
-  * Reduced pump code to ~82 lines of code
-    -- Added multiple oil pump zones and target zones
-  * Optimized Server side oil collection 
-   -- Added item check for 'empty_oil 
-   -- Added check to see if play can carry the item
-V0.0.3 -- Expansion
- * Added an indepth timer to how long the valve stays open
- * Add randomized collection zones (prevents player congregation) and oil types (heavy and light crude oil).
- * Increased configuration
- * Began the refine process
-V0.0.4 -- Initial
-* Added basic refining
-* Added oil drum filling process
-* Added a sell point
-* Added refining automation
-* Increased configuration
+V1.0.0 ROADMAP
 
+Completed -- 
+  - Collection [Optimized]
+  - Refining [Optimized]
+ToDo -- 
+  - Selling [Multi-Framework support]
 
-PLANNED: 
-  * More Oil Types
-  * More in-depth refining, drum filling and selling
-  * Oil vehicle rentals and sales
+------------------------------------------------------------------------
+
+Log Reset 07/04/25
+- Released refining update
