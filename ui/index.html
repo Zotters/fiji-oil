@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>[FIJI-OIL]</title>
+  <link rel="stylesheet" href="script.css" />
+</head>
+<body>
+    <div id="valve-timer" class="hidden">
+        <div class="timer-label">Valve Closes</div>
+        <div class="timer-circle">
+          <svg viewBox="0 0 100 100">
+            <circle class="track" cx="50" cy="50" r="45" />
+            <circle class="fill" cx="50" cy="50" r="45" />
+          </svg>
+          <div class="timer-text" id="timer-text">60s</div>
+        </div>
+      </div>
+      <div id="refinery-panel" class="hidden">
+        <div id="refinery-panel" class="hidden" data-position="bottom-middle"></div>
+        <div class="refinery-header">Refinery Console</div>
+      
+        <div class="refinery-info">
+          <div><strong>Oil Type:</strong> <span id="ref-oil">—</span></div>
+          <div><strong>Hopper:</strong> <span id="ref-hopper">0/4</span></div>
+          <div><strong>Phase:</strong> <span id="ref-phase">Idle</span></div>
+        </div>
+      
+        <div class="refinery-progress">
+          <div class="progress-label" id="ref-progress-label">Progress</div>
+          <div class="progress-bar">
+            <div id="ref-progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+      
+      
+
+  <script src="script.js"></script>
+</body>
+</html>

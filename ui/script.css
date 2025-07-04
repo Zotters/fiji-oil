@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    background: transparent;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  #valve-timer {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  
+  .timer-label {
+    font-size: 24px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 5px #000;
+    letter-spacing: 1px;
+  }
+  
+  .timer-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  }
+  
+  .timer-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  
+  .track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+  }
+  
+  .fill {
+    fill: none;
+    stroke: #00c896;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+  }
+  
+  .timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #000;
+  }
+  .refinery-panel {
+    position: absolute;
+    background: rgba(15, 15, 15, 0.85);
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    z-index: 999;
+    min-width: 240px;
+  }
+  
+  /* Top Positions */
+  .top-left {
+    top: 5%;
+    left: 5%;
+  }
+  .top-middle {
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .top-right {
+    top: 5%;
+    right: 5%;
+  }
+  
+  /* Bottom Positions */
+  .bottom-left {
+    bottom: 5%;
+    left: 5%;
+  }
+  .bottom-middle {
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .bottom-right {
+    bottom: 5%;
+    right: 5%;
+  }
+  
+  /* Side Centers */
+  .left-middle {
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+  }
+  .right-middle {
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+  }
+    
+  .refinery-header {
+    font-size: 22px;
+    margin-bottom: 8px;
+    text-align: center;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 4px;
+  }
+  
+  .refinery-info div {
+    margin: 4px 0;
+  }
+  .refinery-progress {
+    margin-top: 10px;
+  }
+  
+  .progress-label {
+    font-size: 16px;
+    margin-bottom: 4px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00c896, #00e676);
+    transition: width 0.3s ease;
+  }
+  
+        

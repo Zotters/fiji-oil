@@ -11,53 +11,55 @@ function setupOilPumps(coords)
         coords = vec3(coords.x, coords.y, coords.z),
         size = vec3(11.0, 15.5, 21.0),
         rotation = coords.w,
+        distance = 2,
         debug = false,
         onEnter = onEnter,
         onExit = onExit,
     })
 end
 
+-- [[ REFINE ]] --
 exports.ox_target:addBoxZone({
-    name = "RefineryStation",
-    coords = Config.Refine,
-    size = vec3(1.5, 1.5, 2.0),
-    rotation = 0.0,
-    debug = false,
+    name = "HOPPER",
+    coords = Config.Hopper,
+    distance = 2,
+    size = vec3(3, 3, 3),
+    debug = true,
     options = {
         {
-            label = "Refine Oil",
-            icon = "fa-solid fa-fire-burner",
-            event = "ZOTTERS-REFINERY:StartRefine"
+            icon = "fa-solid fa-temperature-high",
+            label = "Load Hopper",
+            serverEvent = "ZOTTERS-REFINERY:StartRefine"
         }
     }
 })
 
 exports.ox_target:addBoxZone({
-    name = "DrumLoader",
-    coords = Config.DrumFill,
-    size = vec3(1.2, 1.2, 2.0),
-    rotation = 0,
-    debug = false,
+    name = "DISTILL",
+    coords = Config.Distill,
+    distance = 2,
+    size = vec3(3, 3, 3),
+    debug = true,
     options = {
         {
-            label = "Load Oil Drum",
-            icon = "fa-solid fa-barrel",
-            event = "ZOTTERS-DRUM:StartLoad"
+            icon = "fa-solid fa-temperature-high",
+            label = "Begin Distillation",
+            serverEvent = "ZOTTERS-REFINERY:StartDistillation"
         }
     }
 })
 
 exports.ox_target:addBoxZone({
-    name = "DrumSales",
-    coords = Config.SellDrum, -- your sale location
-    size = vec3(1.5, 1.5, 2.0),
-    rotation = 0,
-    debug = false,
+    name = "EXTRACTION",
+    coords = Config.Extraction,
+    distance = 2,
+    size = vec3(3, 3, 3),
+    debug = true,
     options = {
         {
-            label = "Sell Oil Drum",
-            icon = "fa-solid fa-oil-can",
-            serverEvent = "ZOTTERS-DRUM:SellDrum"
+            icon = "fa-solid fa-flask",
+            label = "Extract Refined Oil",
+            serverEvent = "ZOTTERS-REFINERY:StartExtraction"
         }
     }
 })
