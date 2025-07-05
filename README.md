@@ -12,7 +12,7 @@
   > This is on a timer, once the timer expires the blip will be removed and the player will have to reopen the valve.
 * Different oil types
 * Refine the Oil
-* Sell the Oil
+* --Sell the Oil
 
 
 
