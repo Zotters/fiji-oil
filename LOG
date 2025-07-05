@@ -13,3 +13,25 @@ ToDo --
 
 Log Reset 07/04/25
 - Released refining update
+
+V0.0.1 - Packaging
+Basic packaging system created
+    - Uses an average system to determine the outcome of the drum
+        * This a simplicist calculation and to allow 'less' inventory managment. However players managing their inventories will recieve a beter drum. Such 5x Light (Pure) Refined will equal a Light (Pure) oil drum.
+          This is a better reward system for players actually involved in the oil process other then trying to make a quick dollar. This also allows the players to mix 'left-over' oils and receive a drum. I believe
+          this is our best current solution for packaging. However expect modifications and improvements in the future. 
+      EXAMPLE (BREAKDOWN):   
+          Quality |	Item Name Prefix	| Score
+          Pure	| refined_[light/heavy]_pure |	3
+          Standard |	refined_[light/heavy]_standard |	2
+          Dirty	| refined_[light/heavy]_dirty	| 1
+
+
+              Mixture (5 units)	| Score | Total	Average |	Drum Produced
+              5x  refined_light_pure | 15 |	3.0	| drum_light_pure
+              3x pure, 2x standard |	13 |	2.6 |	drum_light_standard
+              2x standard, 3x dirty	| 8 | 1.6 |	drum_light_dirty
+              1x pure, 2x standard, 2x dirty|	9	| 1.8 |	drum_light_standard
+              5x refined_heavy_dirty | 5 | 1.0	| drum_heavy_dirty
+Packaging UI - Began packaging ui for players to add which oil they want to package. Instead of the server grabbing items directly from the inventory this will allow players to make mixtures and all one oil type.
+ 
