@@ -42,3 +42,8 @@ Packaging UI - Began packaging ui for players to add which oil they want to pack
     - Clear button + Cancel button
     - Panel shows the estimated quality
     - Removes items from the inventory and adds new item corresponding to the mix
+
+V0.0.2 - Deliveries
+  - Mission style deliveries
+  - Min payouts and Max payouts; payouts are random per oil drum type
+  - Delivery Console; Select drums which you want to deliver; Generates randoms routes from Config.DeliveryRoutes
