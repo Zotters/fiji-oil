@@ -47,3 +47,5 @@ V0.0.2 - Deliveries
   - Mission style deliveries
   - Min payouts and Max payouts; payouts are random per oil drum type
   - Delivery Console; Select drums which you want to deliver; Generates randoms routes from Config.DeliveryRoutes
+V0.0.3 - 
+    - Honestly might rewrite the whole script.
