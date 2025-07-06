@@ -34,4 +34,11 @@ Basic packaging system created
               1x pure, 2x standard, 2x dirty|	9	| 1.8 |	drum_light_standard
               5x refined_heavy_dirty | 5 | 1.0	| drum_heavy_dirty
 Packaging UI - Began packaging ui for players to add which oil they want to package. Instead of the server grabbing items directly from the inventory this will allow players to make mixtures and all one oil type.
- 
+   - Allows mixing of oils into the drum, uses above logic to determine the quality of the barrel.
+    - Checks for empty_drum
+    - Added 'Fill' button -- Automatically selects oil in the inventory to use
+    - Selectable oil type by clicking to add
+    - Drum fill time handled in Config.lua
+    - Clear button + Cancel button
+    - Panel shows the estimated quality
+    - Removes items from the inventory and adds new item corresponding to the mix
