@@ -1,10 +1,10 @@
 
 
 ![](https://i.ibb.co/YTKXfNVK/Fiji-Oil20.png)  
-*Welcome to the Fiji Oil project. This script is made for FiveM, it was built on the QBX framework. It features a rich configuration and a collection and refining process to oil. This adds a new way for players to earn money on your server while introducing new items that can be used in various ways.*
+*Welcome to the Fiji Oil project. This is an open-source oil project made for FiveM. This script adds ways for players to collect, refine, package and deliever oil to earn money. Please keep in mind that this is a work in progress and all features are not listed and features that are listed may not function properly.*
 
 # WORK IN PROGRESS
-*This is a work in progress! Not all features are available. Available features may not function properly, if you experience issues please share!*
+*All features are not listed and features that are listed may not function properly! If you are experiencing [https://github.com/Zotters/fiji-oil/issues](issues) please open a [https://github.com/Zotters/fiji-oil/issues/new/choose](new_issue).*
 
 ## Features
 * Open valve at pump, oil flows for a certain amount of time. 
