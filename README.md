@@ -4,7 +4,7 @@
 *Welcome to the Fiji Oil project. This is an open-source oil project made for FiveM. This script adds ways for players to collect, refine, package and deliever oil to earn money. Please keep in mind that this is a work in progress and all features are not listed and features that are listed may not function properly.*
 
 # WORK IN PROGRESS
-*All features are not listed and features that are listed may not function properly! If you are experiencing [https://github.com/Zotters/fiji-oil/issues](issues) please open a [https://github.com/Zotters/fiji-oil/issues/new/choose](new_issue).*
+*All features are not listed and features that are listed may not function properly! If you are experiencing [issue](https://github.com/Zotters/fiji-oil/issues) please open a [new issue](https://github.com/Zotters/fiji-oil/issues/new/choose).*
 
 ## Features
 * Open valve at pump, oil flows for a certain amount of time. 
