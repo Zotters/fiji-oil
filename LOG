@@ -18,3 +18,23 @@ V0.0.1 - A Complete Overhaul for 1.0
       - Items are now handled within the script using ox_inventory exports (images and metadata)
       - The longer the crude sits in the players inventory the more sludge builds up (only while player is active) 
         - This should be encouraging to players to refine their oils and not just power farm crude
+------------------------------------------------------------------------
+V0.0.2 - Collection/Refining/Framework Support
+   * Collection - Custom progress bar and notification UI.
+      - Valve opening has currently been removed.
+      - Oil is now collected from Oil Fields 
+         - Crude Oil is handled under two (2) types - Heavy & Light Crude Oil
+            - Oil Types now generate metadata when collected from oil fields
+               - Quality: Random generated quality between a set parameter (Config.Lua) each oil field can vary the quality. Random skill roll to add to quality.
+               - Viscosity: Random generated viscosity.
+               - Decay: The longer the oil sits in players inventory the more sludge builds up
+   * Refining
+      - 4 Phase Refining: Full interactive UI for each phase.
+         - Hopper Load
+         - Distill
+         - Purify
+         - Extraction
+ * Framework
+      - OX & QB Inventory Logic
+(Still lots to do before 1.0, perhaps a '0.7' release to test the next function and framework support before releasing 1.0. Refining still has to be implemented. Collection is about 90% done just need to update logic
+for multiframework.)
