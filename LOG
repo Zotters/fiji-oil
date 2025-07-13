@@ -1,31 +1,40 @@
-V0.0.1 -- Fiji Oil Developer Log
-  * Added over 200 lines of code for oil pumps
-    - Featuring - 1 Oil Pump, 1 Target
-                - Animation
-  * Added client side items with images
-  * Added item store for empty oil buckets
-  * Added semi support server side for Oil Collection once valves are opened
-  * Added a timer for closing valves
-V0.0.2 -- Optimization
-  * Reduced pump code to ~82 lines of code
-    -- Added multiple oil pump zones and target zones
-  * Optimized Server side oil collection 
-   -- Added item check for 'empty_oil 
-   -- Added check to see if play can carry the item
-V0.0.3 -- Expansion
- * Added an indepth timer to how long the valve stays open
- * Add randomized collection zones (prevents player congregation) and oil types (heavy and light crude oil).
- * Increased configuration
- * Began the refine process
-V0.0.4 -- Initial
-* Added basic refining
-* Added oil drum filling process
-* Added a sell point
-* Added refining automation
-* Increased configuration
+V1.0.0 ROADMAP
 
+*TODO - 
+    * Collection (Started)
+    * Refining
+    * Packaging
+    * Deliveries
+------------------------------------------------------------------------
 
-PLANNED: 
-  * More Oil Types
-  * More in-depth refining, drum filling and selling
-  * Oil vehicle rentals and sales
+Log Reset 07/06/25
+Was not pleased with the optimization of the script and actually ended up breaking it and felt as if I should do a complete overhaul on how it functions. Starting from the ground up and making 1.0 something to live 
+for a little bit with minor updates. As I have other scripts in the works as well. So....
+-------------------
+V0.0.1 - A Complete Overhaul for 1.0
+    - Opening a valve has been removed. We will now use oil fields. Enter an oil field and with your third eye start collecting.
+      - Custom UI > Progress Bar, Notification
+      - Crude oil types = Light and Heavy - Quality is random > Items now feature metadata.
+      - Items are now handled within the script using ox_inventory exports (images and metadata)
+      - The longer the crude sits in the players inventory the more sludge builds up (only while player is active) 
+        - This should be encouraging to players to refine their oils and not just power farm crude
+------------------------------------------------------------------------
+V0.0.2 - Collection/Refining/Framework Support
+   * Collection - Custom progress bar and notification UI.
+      - Valve opening has currently been removed.
+      - Oil is now collected from Oil Fields 
+         - Crude Oil is handled under two (2) types - Heavy & Light Crude Oil
+            - Oil Types now generate metadata when collected from oil fields
+               - Quality: Random generated quality between a set parameter (Config.Lua) each oil field can vary the quality. Random skill roll to add to quality.
+               - Viscosity: Random generated viscosity.
+               - Decay: The longer the oil sits in players inventory the more sludge builds up
+   * Refining
+      - 4 Phase Refining: Full interactive UI for each phase.
+         - Hopper Load
+         - Distill
+         - Purify
+         - Extraction
+ * Framework
+      - OX & QB Inventory Logic
+(Still lots to do before 1.0, perhaps a '0.7' release to test the next function and framework support before releasing 1.0. Refining still has to be implemented. Collection is about 90% done just need to update logic
+for multiframework.)
