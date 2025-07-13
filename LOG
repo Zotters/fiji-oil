@@ -38,3 +38,7 @@ V0.0.2 - Collection/Refining/Framework Support
       - OX & QB Inventory Logic
 (Still lots to do before 1.0, perhaps a '0.7' release to test the next function and framework support before releasing 1.0. Refining still has to be implemented. Collection is about 90% done just need to update logic
 for multiframework.)
+------------------------------------------------------------------------
+V0.0.3 - Reliability
+This script will now feature its own library for notifications, progress bars, etc and zones. Removing the need for OxLib. Please be patient as this will take awhile to implement and get everything that is currently
+in the script functional.
