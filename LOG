@@ -28,5 +28,8 @@ in the script functional.
 * UI - Progress / Notifications = Functional
 * Zones = Functional
 * Valve - Restored. Player opens valve > random generated oil field (notified with the oil field name and blip on map) > player uses empty_oil (Empty Oil Bucket) to collect oil from zone.
+------------------------------------------------------------------------
+V0.0.4 - Refinery
+Began Refinery Panel Rework.
 
 
