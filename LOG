@@ -7,29 +7,14 @@ V1.0.0 ROADMAP
     * Deliveries
 ------------------------------------------------------------------------
 
-Log Reset 07/06/25
-Was not pleased with the optimization of the script and actually ended up breaking it and felt as if I should do a complete overhaul on how it functions. Starting from the ground up and making 1.0 something to live 
-for a little bit with minor updates. As I have other scripts in the works as well. So....
--------------------
-V0.0.1 - A Complete Overhaul for 1.0
-    - Opening a valve has been removed. We will now use oil fields. Enter an oil field and with your third eye start collecting.
-      - Custom UI > Progress Bar, Notification
-      - Crude oil types = Light and Heavy - Quality is random > Items now feature metadata.
-      - Items are now handled within the script using ox_inventory exports (images and metadata)
-      - The longer the crude sits in the players inventory the more sludge builds up (only while player is active) 
-        - This should be encouraging to players to refine their oils and not just power farm crude
-------------------------------------------------------------------------
-V0.0.2 - Redacted.
-------------------------------------------------------------------------
-V0.0.3 - Reliability/Framework/Standalone
-This script will now feature its own library for notifications, progress bars, etc and zones. Removing the need for OxLib. Please be patient as this will take awhile to implement and get everything that is currently
-in the script functional.
+Log Reset 0/27/2025
+Currently in the process of redesigning the whole script to remove ox lib. The script will now feature fiji lib and multi inventory support. This is not a quick process so please be patient.
+I want to release a optimized script with performance, security and simplicity in mind. With that being said the next release of the oil script will be version 1.0. 
 
-* UI - Progress / Notifications = Functional
-* Zones = Functional
-* Valve - Restored. Player opens valve > random generated oil field (notified with the oil field name and blip on map) > player uses empty_oil (Empty Oil Bucket) to collect oil from zone.
-------------------------------------------------------------------------
-V0.0.4 - Refinery
-Began Refinery Panel Rework.
+Version 1.0
+ * Oil Collection
+ * 4 Phase Refining System
+ * Delivery Missions 
 
+Thank you for patience.
 
