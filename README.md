@@ -15,7 +15,7 @@
 * --Sell the Oil
 
 ## Items
-||```lua
+```lua
 -- [[ FIJI OIL ]] --
 -- Base collection items
 ['empty_oil'] = {
@@ -144,6 +144,7 @@
 ```lua
 itemsFoundIn = INSTALLATION.INFO
 ```
+
 >*Add this to your shops.lua*  
 ```lua
 	OilCompany = {
