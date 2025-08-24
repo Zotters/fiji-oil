@@ -16,9 +16,20 @@
           </svg>
           <div class="timer-text" id="timer-text">60s</div>
         </div>
-      </div>
-      <div id="refinery-panel" class="hidden">
-        <div id="refinery-panel" class="hidden" data-position="bottom-middle"></div>
+    </div>
+    
+    <div id="delivery-timer" class="hidden">
+        <div class="timer-label">Delivery Time</div>
+        <div class="timer-circle">
+          <svg viewBox="0 0 100 100">
+            <circle class="track" cx="50" cy="50" r="45" />
+            <circle class="fill delivery-fill" cx="50" cy="50" r="45" />
+          </svg>
+          <div class="timer-text" id="delivery-timer-text">20:00</div>
+        </div>
+    </div>
+    
+    <div id="refinery-panel" class="hidden">
         <div class="refinery-header">Refinery Console</div>
       
         <div class="refinery-info">
@@ -33,10 +44,9 @@
             <div id="ref-progress-fill" class="progress-fill"></div>
           </div>
         </div>
-      </div>
-      
-      
+    </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+

@@ -2,8 +2,8 @@ fx_version 'cerulean'
 games { 'gta5' }
 
 author 'Zotters'
-description 'Zotters Oil'
-version '0.5.0'
+description 'Fiji Oils'
+version '1.0.0'
 lua54 'yes'
 
 ui_page 'ui/index.html'
@@ -12,19 +12,34 @@ files {
     'ui/index.html',
     'ui/script.css',
     'ui/script.js'
-  }
+}
 
 shared_scripts {
     '@ox_lib/init.lua',
     'config.lua',
+    'bridge.lua'
+}
+
+client_scripts {
+    'config.lua',
+    'client/main.lua',
+    'client/zones.lua',
+    'client/pump.lua',
+    'client/refinery.lua',
+    'client/packaging.lua',
+    'client/delivery.lua'
 }
 
 server_scripts {
-    'core/server.lua'
+    'config.lua',
+    'loader.lua',
+    'server/main.lua',
+    'server/pump.lua',
+    'server/refinery.lua',
+    'server/packaging.lua',
+    'server/delivery.lua'
 }
-client_scripts {
-    'core/zones.lua',
-    'core/events.lua',
-    'core/pump.lua',
-    'core/refine.lua'
+
+dependencies {
+    'ox_lib'
 }
