@@ -15,8 +15,7 @@
 * --Sell the Oil
 
 ## Items
-||    
-```lua
+||```lua
 -- [[ FIJI OIL ]] --
 -- Base collection items
 ['empty_oil'] = {
