@@ -14,7 +14,131 @@
 * Refine the Oil
 * --Sell the Oil
 
+## Items
+||    
+```lua
+-- [[ FIJI OIL ]] --
+-- Base collection items
+['empty_oil'] = {
+    label = 'Empty Oil Bucket',
+    weight = 250,
+    stack = true,
+    image = 'empty_oil'
+},
+['crude_light'] = {
+    label = 'Light Crude Oil',
+    weight = 800,
+    stack = false,
+    image = 'crude_light'
+},
+['crude_heavy'] = {
+    label = 'Heavy Crude Oil',
+    weight = 1200,
+    stack = false,
+    image = 'crude_heavy'
+},
 
+-- Refined oil products (Light)
+['refined_light_pure'] = {
+    label = 'Pure Light Oil',
+    weight = 600,
+    stack = true,
+    image = 'refined_light_pure'
+},
+['refined_light_standard'] = {
+    label = 'Standard Light Oil',
+    weight = 600,
+    stack = true,
+    image = 'refined_light_standard'
+},
+['refined_light_dirty'] = {
+    label = 'Dirty Light Oil',
+    weight = 600,
+    stack = true,
+    image = 'refined_light_dirty'
+},
+
+-- Refined oil products (Heavy)
+['refined_heavy_pure'] = {
+    label = 'Pure Heavy Oil',
+    weight = 900,
+    stack = true,
+    image = 'refined_heavy_pure'
+},
+['refined_heavy_standard'] = {
+    label = 'Standard Heavy Oil',
+    weight = 900,
+    stack = true,
+    image = 'refined_heavy_standard'
+},
+['refined_heavy_dirty'] = {
+    label = 'Dirty Heavy Oil',
+    weight = 900,
+    stack = true,
+    image = 'refined_heavy_dirty'
+},
+
+-- Packaging materials
+['empty_drum'] = {
+    label = 'Empty Oil Drum',
+    weight = 500,
+    stack = true,
+    image = 'empty_drum'
+},
+
+-- Packaged products (Light)
+['packaged_light_pure'] = {
+    label = 'Packaged Pure Light Oil',
+    weight = 1200,
+    stack = true,
+    image = 'packaged_light_pure'
+},
+['packaged_light_standard'] = {
+    label = 'Packaged Standard Light Oil',
+    weight = 1200,
+    stack = true,
+    image = 'packaged_light_standard'
+},
+['packaged_light_dirty'] = {
+    label = 'Packaged Dirty Light Oil',
+    weight = 1200,
+    stack = true,
+    image = 'packaged_light_dirty'
+},
+
+-- Packaged products (Heavy)
+['packaged_heavy_pure'] = {
+    label = 'Packaged Pure Heavy Oil',
+    weight = 1500,
+    stack = true,
+    image = 'packaged_heavy_pure'
+},
+['packaged_heavy_standard'] = {
+    label = 'Packaged Standard Heavy Oil',
+    weight = 1500,
+    stack = true,
+    image = 'packaged_heavy_standard'
+},
+['packaged_heavy_dirty'] = {
+    label = 'Packaged Dirty Heavy Oil',
+    weight = 1500,
+    stack = true,
+    image = 'packaged_heavy_dirty'
+},
+
+-- Byproducts
+['sulfur_chunk'] = {
+    label = 'Sulfur Chunk',
+    weight = 150,
+    stack = true,
+    image = 'sulfur_chunk'
+},
+['plastic_residue'] = {
+    label = 'Plastic Residue',
+    weight = 100,
+    stack = true,
+    image = 'plastic_residue'
+}```||
 
 ## Installation
 >*Add these to your inventory items.lua*
