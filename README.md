@@ -133,9 +133,7 @@ You'll need to add these items to your inventory system.
 
 ## Screenshots
 
-![Oil Pump](https://i.imgur.com/placeholder1.png)
-![Refinery](https://i.imgur.com/placeholder2.png)
-![Delivery](https://i.imgur.com/placeholder3.png)
+**Coming soon**
 
 ## Support
 
