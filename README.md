@@ -704,7 +704,9 @@ For support, use [Issues](https://github.com/Zotters/fiji-oil/issues)
 - Dynamic oil extraction
 
 ### 1.0.1
-- Updated item images
+- Added multi-target support
+- Added script usage for non-target systems
+- Updated Bridge 
 
 ---
 
