@@ -1,10 +1,10 @@
-local Bridge = require 'bridge'
+local Fiji = require 'bridge'
 local isInitialized = false
 
 function Initialize()
     if isInitialized then return end
     
-    if not Bridge.Init() then
+    if not Fiji.Init() then
         return false
     end
     
@@ -17,7 +17,7 @@ end
 
 function RegisterCallbacks()
     lib.callback.register('fiji-oil:server:getEmptyContainers', function(source)
-        local hasItem, count = Bridge.HasItem(source, "empty_oil")
+        local hasItem, count = Fiji.HasItem(source, "empty_oil")
         return count or 0
     end)
     
@@ -25,7 +25,7 @@ function RegisterCallbacks()
         local availableOil = {}
         
         for _, oilType in ipairs(Config.OilTypes) do
-            local hasItem, itemCount = Bridge.HasItem(source, oilType.name)
+            local hasItem, itemCount = Fiji.HasItem(source, oilType.name)
             
             if hasItem and itemCount > 0 then
                 table.insert(availableOil, {
@@ -47,12 +47,12 @@ function RegisterCallbacks()
             
             for _, quality in ipairs(qualities) do
                 local refinedName = oilConfig.result .. "_" .. quality
-                local hasItem, itemCount = Bridge.HasItem(source, refinedName)
+                local hasItem, itemCount = Fiji.HasItem(source, refinedName)
                 
                 if hasItem and itemCount > 0 then
                     table.insert(refinedOil, {
                         name = refinedName,
-                        label = Bridge.GetItemLabel(refinedName),
+                        label = Fiji.GetItemLabel(refinedName),
                         count = itemCount
                     })
                 end
@@ -67,12 +67,12 @@ function RegisterCallbacks()
         
         for _, recipe in ipairs(Config.PackagingRequirements.items) do
             if recipe.result then
-                local hasItem, itemCount = Bridge.HasItem(source, recipe.result)
+                local hasItem, itemCount = Fiji.HasItem(source, recipe.result)
                 
                 if hasItem and itemCount > 0 then
                     table.insert(packagedOil, {
                         name = recipe.result,
-                        label = Bridge.GetItemLabel(recipe.result),
+                        label = Fiji.GetItemLabel(recipe.result),
                         count = itemCount
                     })
                 end

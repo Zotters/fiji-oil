@@ -1,4 +1,5 @@
 local isPackaging = false
+local Fiji = require 'bridge'
 
 RegisterNetEvent('fiji-oil:client:openPackagingMenu')
 AddEventHandler('fiji-oil:client:openPackagingMenu', function()

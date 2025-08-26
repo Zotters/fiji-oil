@@ -7,7 +7,7 @@
  ░███  ░     ░███  ███   ░███  ░███    ░░███     ███  ░███  ░███      █
  █████       █████░░████████   █████    ░░░███████░   █████ ███████████
 ░░░░░       ░░░░░  ░░░░░░░░   ░░░░░       ░░░░░░░    ░░░░░ ░░░░░░░░░░░ 
-                        VERSION 1.0
+                        VERSION 1.0.1
                         ----------
             https://github.com/Zotters/fiji-oil/
                         ----------
@@ -25,6 +25,9 @@ Config.ValveIcon = 'fa-solid fa-faucet'
 Config.ValveOpening = 10000 -- Time in ms to open valve
 Config.ValveClosing = 5 -- Time in minutes before valve closes
 Config.CollectionIcon = 'fa-solid fa-fill-drip'
+Config.UseTarget = true -- Set to false to use proximity-based interactions with text UI instead of target system
+Config.InteractionDistance = 2.0 -- Distance for proximity interactions when target is disabled
+
 
 -- [[ REFINE SETTINGS ]] -- 
 Config.Hopper = vector3(228.76, -2978.77, 7.45)

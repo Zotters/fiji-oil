@@ -1,4 +1,4 @@
-local Bridge = require 'bridge'
+local Fiji = require 'bridge'
 local activeDeliveries = {}
 local deliveryCounter = 0
 
@@ -15,7 +15,7 @@ lib.callback.register('fiji-oil:server:getPackagedOil', function(source)
     }
     
     for _, oil in ipairs(packagedOilTypes) do
-        local hasOil, oilCount = Bridge.HasItem(source, oil.name)
+        local hasOil, oilCount = Fiji.HasItem(source, oil.name)
         if hasOil and oilCount > 0 then
             table.insert(oilData, {
                 name = oil.name,
@@ -31,15 +31,15 @@ end)
 RegisterNetEvent('fiji-oil:server:requestDelivery', function(oilType, quantity)
     local source = source
     
-    local hasOil, oilCount = Bridge.HasItem(source, oilType)
+    local hasOil, oilCount = Fiji.HasItem(source, oilType)
     if not hasOil or oilCount < quantity then
-        Bridge.Notify(source, "You don't have enough " .. (Config.ItemLabels[oilType] or oilType), "error")
+        Fiji.Notify(source, "You don't have enough " .. (Config.ItemLabels[oilType] or oilType), "error")
         return
     end
     
     for _, delivery in pairs(activeDeliveries) do
         if delivery.player == source then
-            Bridge.Notify(source, "You are already on a delivery", "error")
+            Fiji.Notify(source, "You are already on a delivery", "error")
             return
         end
     end
@@ -52,7 +52,7 @@ RegisterNetEvent('fiji-oil:server:requestDelivery', function(oilType, quantity)
     end
     
     if #validLocations == 0 then
-        Bridge.Notify(source, "No delivery locations available for this oil type", "error")
+        Fiji.Notify(source, "No delivery locations available for this oil type", "error")
         return
     end
     
@@ -78,7 +78,7 @@ RegisterNetEvent('fiji-oil:server:requestDelivery', function(oilType, quantity)
         startTime = os.time()
     }
     
-    if Bridge.RemoveItem(source, oilType, quantity) then
+    if Fiji.RemoveItem(source, oilType, quantity) then
         TriggerClientEvent('fiji-oil:client:startDelivery', source, {
             id = deliveryId,
             destination = location.coords,
@@ -88,7 +88,7 @@ RegisterNetEvent('fiji-oil:server:requestDelivery', function(oilType, quantity)
             distanceFactor = location.distance or 1.0
         })
     else
-        Bridge.Notify(source, "Failed to remove oil from inventory", "error")
+        Fiji.Notify(source, "Failed to remove oil from inventory", "error")
         activeDeliveries[deliveryId] = nil
     end
 end)
@@ -98,12 +98,12 @@ RegisterNetEvent('fiji-oil:server:completeDelivery', function(deliveryId, timeRa
     
     local delivery = activeDeliveries[deliveryId]
     if not delivery then
-        Bridge.Notify(source, "Invalid delivery", "error")
+        Fiji.Notify(source, "Invalid delivery", "error")
         return
     end
     
     if delivery.player ~= source then
-        Bridge.Notify(source, "This is not your delivery", "error")
+        Fiji.Notify(source, "This is not your delivery", "error")
         return
     end
     
@@ -124,7 +124,7 @@ RegisterNetEvent('fiji-oil:server:completeDelivery', function(deliveryId, timeRa
     end
     
     local success = pcall(function()
-        Bridge.AddMoney(source, 'bank', finalPayment, 'Oil Delivery Payment')
+        Fiji.AddMoney(source, 'bank', finalPayment, 'Oil Delivery Payment')
     end)
     
     if not success then
@@ -141,7 +141,7 @@ RegisterNetEvent('fiji-oil:server:completeDelivery', function(deliveryId, timeRa
         bonusText = " (includes " .. bonusPercent .. "% time bonus)"
     end
     
-    Bridge.Notify(source, "Delivery completed! You earned $" .. finalPayment .. bonusText, "success")
+    Fiji.Notify(source, "Delivery completed! You earned $" .. finalPayment .. bonusText, "success")
     
     activeDeliveries[deliveryId] = nil
 end)
@@ -154,9 +154,9 @@ RegisterNetEvent('fiji-oil:server:cancelDelivery', function(deliveryId)
     
     if delivery.player ~= source then return end
     
-    Bridge.AddItem(source, delivery.oilType, delivery.quantity)
+    Fiji.AddItem(source, delivery.oilType, delivery.quantity)
     
-    Bridge.Notify(source, "Delivery cancelled. Your oil has been returned.", "inform")
+    Fiji.Notify(source, "Delivery cancelled. Your oil has been returned.", "inform")
     
     activeDeliveries[deliveryId] = nil
 end)

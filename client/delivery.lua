@@ -7,6 +7,7 @@ local deliveryDestination = nil
 local deliveryStartTime = 0
 local deliveryTimeRemaining = 0
 local deliveryTimer = nil
+local Fiji = require 'bridge'
 
 RegisterNetEvent('fiji-oil:client:openDeliveryMenu')
 AddEventHandler('fiji-oil:client:openDeliveryMenu', function()

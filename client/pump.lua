@@ -1,5 +1,7 @@
+local Fiji = require 'bridge'
 local activePumps = {}
 local isCollecting = false
+local activeCollectionTextUIs = {}
 
 exports('DirectOpenValve', function(pumpId)
     OpenValve(pumpId)
@@ -128,23 +130,64 @@ function CreateCollectionZone(coords, pumpId, oilType)
     BeginTextCommandSetBlipName("STRING")
     AddTextComponentString("Oil Collection")
     EndTextCommandSetBlipName(blip)
-        
-    exports.ox_target:addSphereZone({
-        name = "oil_collection_" .. tostring(pumpId),
-        coords = vec3(coords.x, coords.y, coords.z),
-        radius = 3.0,
-        debug = Config.Debug or false,
-        options = {
+    
+    local zone
+    if Config.UseTarget then
+        zone = Fiji.AddTargetSphereZone(
+            "oil_collection_" .. tostring(pumpId),
+            vec3(coords.x, coords.y, coords.z),
+            3.0,
             {
-                name = "collect_oil_" .. tostring(pumpId),
-                icon = Config.CollectionIcon or 'fa-solid fa-fill-drip',
-                label = "Collect " .. oilType.label .. " Oil",
-                onSelect = function()
-                    CollectOil(pumpId, oilType.name)
+                {
+                    name = "collect_oil_" .. tostring(pumpId),
+                    icon = Config.CollectionIcon or 'fa-solid fa-fill-drip',
+                    label = "Collect " .. oilType.label .. " Oil",
+                    onSelect = function()
+                        CollectOil(pumpId, oilType.name)
+                    end
+                }
+            },
+            Config.Debug or false
+        )
+    else
+        zone = CreateThread(function()
+            while activePumps[pumpId] do
+                local sleep = 1000
+                local playerCoords = GetEntityCoords(PlayerPedId())
+                local distance = #(playerCoords - vector3(coords.x, coords.y, coords.z))
+                
+                if distance < Config.InteractionDistance * 2 then
+                    sleep = 0
+                    
+                    if distance < Config.InteractionDistance then
+                        if not activeCollectionTextUIs[pumpId] then
+                            lib.showTextUI('[E] Collect ' .. oilType.label .. ' Oil', {
+                                position = "left-center",
+                                icon = Config.CollectionIcon or 'fa-solid fa-fill-drip',
+                            })
+                            activeCollectionTextUIs[pumpId] = true
+                        end
+                        
+                        if IsControlJustReleased(0, 38) then -- E key
+                            CollectOil(pumpId, oilType.name)
+                        end
+                    else
+                        if activeCollectionTextUIs[pumpId] then
+                            lib.hideTextUI()
+                            activeCollectionTextUIs[pumpId] = nil
+                        end
+                    end
                 end
-            }
-        }
-    })
+                
+                Wait(sleep)
+            end
+            
+            if activeCollectionTextUIs[pumpId] then
+                lib.hideTextUI()
+                activeCollectionTextUIs[pumpId] = nil
+            end
+        end)
+    end
     
     return {
         blip = blip,
@@ -201,12 +244,19 @@ function CloseValve(pumpId)
             RemoveBlip(pumpData.zone.blip)
         end
         
-        if pumpData.zone.zone then
-            pumpData.zone.zone:remove()
+        if Config.UseTarget then
+            Fiji.RemoveTargetZone("oil_collection_" .. tostring(pumpId))
+        else
+            if activeCollectionTextUIs[pumpId] then
+                lib.hideTextUI()
+                activeCollectionTextUIs[pumpId] = nil
+            end
+            
+            if type(pumpData.zone) == 'number' then
+                TerminateThread(pumpData.zone)
+            end
         end
     end
-    
-    exports.ox_target:removeZone("oil_collection_" .. tostring(pumpId))
     
     activePumps[pumpId] = nil
     

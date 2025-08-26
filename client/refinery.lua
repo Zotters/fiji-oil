@@ -7,6 +7,7 @@ local refineryState = {
     distilledCount = 0,
     extractedCount = 0
 }
+local Fiji = require 'bridge'
 
 RegisterNetEvent('fiji-oil:client:openHopperMenu')
 AddEventHandler('fiji-oil:client:openHopperMenu', function()
@@ -408,5 +409,4 @@ function GetPhaseLabel(phase)
     }
     return phaseLabels[phase or 0] or "Idle"
 end
-
 

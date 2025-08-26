@@ -17,7 +17,8 @@ files {
 shared_scripts {
     '@ox_lib/init.lua',
     'config.lua',
-    'bridge.lua'
+    'bridge.lua',
+    'loader.lua'
 }
 
 client_scripts {
@@ -32,7 +33,6 @@ client_scripts {
 
 server_scripts {
     'config.lua',
-    'loader.lua',
     'server/main.lua',
     'server/pump.lua',
     'server/refinery.lua',

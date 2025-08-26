@@ -1,7 +1,8 @@
-local version = '1.0.0'
+local version = '1.0.1'
 local resourceName = GetCurrentResourceName()
 local repoOwner = 'Zotters'
 local repoName = 'fiji-oil'
+local Fiji = nil
 
 local function DetectFramework()
     if GetResourceState('ox_inventory') == 'started' then
@@ -117,12 +118,18 @@ local function PrintLogo()
 ^7]])
 end
 
-local function PrintInfoBelow(framework, updateInfo)
+local function PrintInfoBelow(framework, updateInfo, targetSystem)
     print('')
     print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
     print('^3Version: ^7' .. version)
     print('^3Author: ^7Zotters')
     print('^3Framework: ^7' .. framework)
+    
+    if targetSystem then
+        print('^3Target System: ^7' .. targetSystem)
+    else
+        print('^3Target System: ^7Disabled (using proximity interactions)')
+    end
     
     if updateInfo then
         print('')
@@ -161,6 +168,24 @@ local function PrintInfoBelow(framework, updateInfo)
     print('')
 end
 
+local function InitializeBridge()
+    Fiji = require 'bridge'
+    
+    if not Fiji.Init() then
+        return false, nil
+    end
+    
+    local targetSystem = nil
+    if Config.UseTarget then
+        targetSystem = Fiji.GetTargetSystem()
+        if not targetSystem then
+            Config.UseTarget = false
+        end
+    end
+    
+    return true, targetSystem
+end
+
 local function Initialize()
     local framework = DetectFramework()
     
@@ -173,14 +198,22 @@ local function Initialize()
         print('')
         return false
     else
+        local bridgeSuccess, targetSystem = InitializeBridge()
+        if not bridgeSuccess then
+            print('^1[' .. resourceName .. '] Failed to initialize bridge component. Some features may not work correctly.^0')
+        end
+        
         CheckVersion(function(updateAvailable, updateInfo)
-            PrintInfoBelow(framework, updateAvailable and updateInfo or nil)
+            PrintInfoBelow(framework, updateAvailable and updateInfo or nil, targetSystem)
         end)
+        
         return true
     end
 end
 
 CreateThread(function()
+    Wait(500)
+    
     if not Initialize() then
         print('^1[' .. resourceName .. '] Failed to initialize. Please check the error messages above.^0')
     end
@@ -188,5 +221,6 @@ end)
 
 return {
     version = version,
-    Initialize = Initialize
+    Initialize = Initialize,
+    Fiji = function() return Fiji end
 }

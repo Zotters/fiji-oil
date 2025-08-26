@@ -1,5 +1,6 @@
-local Bridge = {}
+local Fiji = {}
 local Inventory = nil
+local Target = nil
 
 local function DetectInventory()
     if GetResourceState('ox_inventory') == 'started' then
@@ -15,20 +16,34 @@ local function DetectInventory()
     end
 end
 
-function Bridge.Init()
+local function DetectTarget()
+    if GetResourceState('ox_target') == 'started' then
+        return 'ox'
+    elseif GetResourceState('qb-target') == 'started' then
+        return 'qb'
+    elseif GetResourceState('qtarget') == 'started' then
+        return 'qtarget'
+    else
+        return nil
+    end
+end
+
+function Fiji.Init()
     local detectedInventory = DetectInventory()
     
     if not detectedInventory then
-        print("^1[Fiji Oil] No supported inventory system detected!^7")
         return false
     end
     
-    print("^2[Fiji Oil] Detected inventory system: " .. detectedInventory .. "^7")
     Inventory = detectedInventory
+    
+    local detectedTarget = DetectTarget()
+    Target = detectedTarget
+    
     return true
 end
 
-function Bridge.HasItem(source, item, amount)
+function Fiji.HasItem(source, item, amount)
     amount = amount or 1
     
     if Inventory == 'ox' then
@@ -56,7 +71,7 @@ function Bridge.HasItem(source, item, amount)
     return false, 0
 end
 
-function Bridge.AddItem(source, item, amount, metadata)
+function Fiji.AddItem(source, item, amount, metadata)
     if Inventory == 'ox' then
         return exports.ox_inventory:AddItem(source, item, amount, metadata)
     elseif Inventory == 'qb' then
@@ -78,7 +93,7 @@ function Bridge.AddItem(source, item, amount, metadata)
     return false
 end
 
-function Bridge.RemoveItem(source, item, amount, metadata)
+function Fiji.RemoveItem(source, item, amount, metadata)
     if Inventory == 'ox' then
         return exports.ox_inventory:RemoveItem(source, item, amount, metadata)
     elseif Inventory == 'qb' then
@@ -100,7 +115,7 @@ function Bridge.RemoveItem(source, item, amount, metadata)
     return false
 end
 
-function Bridge.GetMoney(source, account)
+function Fiji.GetMoney(source, account)
     account = account or 'cash'
     
     if Inventory == 'ox' or Inventory == 'qb' then
@@ -124,7 +139,7 @@ function Bridge.GetMoney(source, account)
     return 0
 end
 
-function Bridge.AddMoney(source, account, amount, reason)
+function Fiji.AddMoney(source, account, amount, reason)
     account = account or 'cash'
     reason = reason or 'Fiji Oil: Money added'
     
@@ -151,7 +166,7 @@ function Bridge.AddMoney(source, account, amount, reason)
     return false
 end
 
-function Bridge.RemoveMoney(source, amount, account, reason)
+function Fiji.RemoveMoney(source, account, amount, reason)
     account = account or 'cash'
     reason = reason or 'Fiji Oil: Money removed'
     
@@ -183,7 +198,7 @@ function Bridge.RemoveMoney(source, amount, account, reason)
     return false
 end
 
-function Bridge.Notify(source, message, type, duration)
+function Fiji.Notify(source, message, type, duration)
     type = type or 'inform'
     duration = duration or 5000
     
@@ -207,7 +222,7 @@ function Bridge.Notify(source, message, type, duration)
     end
 end
 
-function Bridge.GetItemLabel(item)
+function Fiji.GetItemLabel(item)
     if Config.ItemLabels and Config.ItemLabels[item] then
         return Config.ItemLabels[item]
     end
@@ -234,4 +249,249 @@ function Bridge.GetItemLabel(item)
     return item
 end
 
-return Bridge
+function Fiji.AddTargetBoxZone(name, coords, size, rotation, options, debug)
+    if not Config.UseTarget then
+        return false
+    end
+    
+    -- Direct check for ox_target
+    if GetResourceState('ox_target') == 'started' then
+        local formattedOptions = {}
+        for _, option in ipairs(options) do
+            local formattedOption = {
+                name = option.name,
+                icon = option.icon,
+                label = option.label
+            }
+            
+            if option.event then
+                formattedOption.onSelect = function()
+                    TriggerEvent(option.event)
+                end
+            elseif option.onSelect then
+                formattedOption.onSelect = option.onSelect
+            end
+            
+            table.insert(formattedOptions, formattedOption)
+        end
+        
+        return exports.ox_target:addBoxZone({
+            name = name,
+            coords = coords,
+            size = size,
+            rotation = rotation,
+            debug = debug,
+            options = formattedOptions
+        })
+    end
+    
+    -- Fall back to other target systems
+    if Target == 'qb' then
+        local qbOptions = {}
+        for _, option in ipairs(options) do
+            local qbOption = {
+                type = "client",
+                icon = option.icon,
+                label = option.label
+            }
+            
+            if option.event then
+                qbOption.action = function()
+                    TriggerEvent(option.event)
+                end
+            elseif option.onSelect then
+                qbOption.action = option.onSelect
+            end
+            
+            table.insert(qbOptions, qbOption)
+        end
+        
+        return exports['qb-target']:AddBoxZone(name, coords, size.x, size.y, {
+            name = name,
+            heading = rotation,
+            debugPoly = debug,
+            minZ = coords.z - (size.z / 2),
+            maxZ = coords.z + (size.z / 2)
+        }, {
+            options = qbOptions,
+            distance = 2.5
+        })
+    elseif Target == 'qtarget' then
+        local qtOptions = {}
+        for _, option in ipairs(options) do
+            local qtOption = {
+                icon = option.icon,
+                label = option.label
+            }
+            
+            if option.event then
+                qtOption.action = function()
+                    TriggerEvent(option.event)
+                end
+            elseif option.onSelect then
+                qtOption.action = option.onSelect
+            end
+            
+            table.insert(qtOptions, qtOption)
+        end
+        
+        return exports.qtarget:AddBoxZone(name, coords, size.x, size.y, {
+            name = name,
+            heading = rotation,
+            debugPoly = debug,
+            minZ = coords.z - (size.z / 2),
+            maxZ = coords.z + (size.z / 2)
+        }, {
+            options = qtOptions,
+            distance = 2.5
+        })
+    end
+    
+    return false
+end
+
+function Fiji.AddTargetSphereZone(name, coords, radius, options, debug)
+    if not Config.UseTarget then
+        return false
+    end
+    
+    -- Direct check for ox_target
+    if GetResourceState('ox_target') == 'started' then
+        local formattedOptions = {}
+        for _, option in ipairs(options) do
+            local formattedOption = {
+                name = option.name,
+                icon = option.icon,
+                label = option.label
+            }
+            
+            if option.event then
+                formattedOption.onSelect = function()
+                    TriggerEvent(option.event)
+                end
+            elseif option.onSelect then
+                formattedOption.onSelect = option.onSelect
+            end
+            
+            table.insert(formattedOptions, formattedOption)
+        end
+        
+        return exports.ox_target:addSphereZone({
+            name = name,
+            coords = coords,
+            radius = radius,
+            debug = debug,
+            options = formattedOptions
+        })
+    end
+    
+    -- Fall back to other target systems
+    if Target == 'qb' then
+        local qbOptions = {}
+        for _, option in ipairs(options) do
+            local qbOption = {
+                type = "client",
+                icon = option.icon,
+                label = option.label
+            }
+            
+            if option.event then
+                qbOption.action = function()
+                    TriggerEvent(option.event)
+                end
+            elseif option.onSelect then
+                qbOption.action = option.onSelect
+            end
+            
+            table.insert(qbOptions, qbOption)
+        end
+        
+        return exports['qb-target']:AddCircleZone(name, vector3(coords.x, coords.y, coords.z), radius, {
+            name = name,
+            debugPoly = debug
+        }, {
+            options = qbOptions,
+            distance = radius
+        })
+    elseif Target == 'qtarget' then
+        local qtOptions = {}
+        for _, option in ipairs(options) do
+            local qtOption = {
+                icon = option.icon,
+                label = option.label
+            }
+            
+            if option.event then
+                qtOption.action = function()
+                    TriggerEvent(option.event)
+                end
+            elseif option.onSelect then
+                qtOption.action = option.onSelect
+            end
+            
+            table.insert(qtOptions, qtOption)
+        end
+        
+        return exports.qtarget:AddCircleZone(name, vector3(coords.x, coords.y, coords.z), radius, {
+            name = name,
+            debugPoly = debug
+        }, {
+            options = qtOptions,
+            distance = radius
+        })
+    end
+    
+    return false
+end
+
+function Fiji.RemoveTargetZone(name)
+    if not Config.UseTarget then
+        return false
+    end
+    
+    if GetResourceState('ox_target') == 'started' then
+        return exports.ox_target:removeZone(name)
+    elseif Target == 'qb' then
+        return exports['qb-target']:RemoveZone(name)
+    elseif Target == 'qtarget' then
+        return exports.qtarget:RemoveZone(name)
+    end
+    
+    return false
+end
+
+function Fiji.AddTargetEntity(entity, options)
+    if not Config.UseTarget then
+        return false
+    end
+    
+    if GetResourceState('ox_target') == 'started' then
+        return exports.ox_target:addEntity(entity, options)
+    elseif Target == 'qb' then
+        return exports['qb-target']:AddTargetEntity(entity, {
+            options = options,
+            distance = 2.5
+        })
+    elseif Target == 'qtarget' then
+        return exports.qtarget:AddTargetEntity(entity, {
+            options = options,
+            distance = 2.5
+        })
+    end
+    
+    return false
+end
+
+function Fiji.GetTargetSystem()
+    if GetResourceState('ox_target') == 'started' then
+        return 'ox'
+    elseif GetResourceState('qb-target') == 'started' then
+        return 'qb'
+    elseif GetResourceState('qtarget') == 'started' then
+        return 'qtarget'
+    else
+        return nil
+    end
+end
+
+return Fiji

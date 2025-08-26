@@ -1,4 +1,4 @@
-local Bridge = require 'bridge'
+local Fiji = require 'bridge'
 local lastCollection = {}
 
 RegisterNetEvent('fiji-oil:server:collectOil', function(oilType)
@@ -13,7 +13,7 @@ RegisterNetEvent('fiji-oil:server:collectOil', function(oilType)
     end
     
     if not validOilType then
-        Bridge.Notify(source, "Invalid oil type", "error")
+        Fiji.Notify(source, "Invalid oil type", "error")
         return
     end
     
@@ -21,28 +21,28 @@ RegisterNetEvent('fiji-oil:server:collectOil', function(oilType)
     local currentTime = os.time()
     
     if lastCollection[playerIdentifier] and (currentTime - lastCollection[playerIdentifier]) < 2 then
-        Bridge.Notify(source, "You're collecting too fast", "error")
+        Fiji.Notify(source, "You're collecting too fast", "error")
         return
     end
     
     lastCollection[playerIdentifier] = currentTime
     
-    local hasContainer, containerCount = Bridge.HasItem(source, "empty_oil")
+    local hasContainer, containerCount = Fiji.HasItem(source, "empty_oil")
     if not hasContainer or containerCount < 1 then
-        Bridge.Notify(source, "You need an empty oil container", "error")
+        Fiji.Notify(source, "You need an empty oil container", "error")
         return
     end
     
-    if Bridge.RemoveItem(source, "empty_oil", 1) then
-        local success = Bridge.AddItem(source, oilType, 1)
+    if Fiji.RemoveItem(source, "empty_oil", 1) then
+        local success = Fiji.AddItem(source, oilType, 1)
         
         if success then
-            Bridge.Notify(source, "You collected " .. Bridge.GetItemLabel(oilType), "success")
+            Fiji.Notify(source, "You collected " .. Fiji.GetItemLabel(oilType), "success")
         else
-            Bridge.AddItem(source, "empty_oil", 1)
-            Bridge.Notify(source, "Your inventory is full", "error")
+            Fiji.AddItem(source, "empty_oil", 1)
+            Fiji.Notify(source, "Your inventory is full", "error")
         end
     else
-        Bridge.Notify(source, "Failed to remove empty container", "error")
+        Fiji.Notify(source, "Failed to remove empty container", "error")
     end
 end)
