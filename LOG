@@ -32,3 +32,14 @@ Majority item images have been created.
     1.) Load crude oil into hopper
       2.) Start Distillation (This is now a timed process, with a random minigame check)
          3.) Packaging - Package refined oil into drums for delivery
+ - Valve Timer is now a sub-panel of the refinery tab in the tablet. 
+ - Store [Supplies]
+      - Players can now use the tablet to place an order for supplies; Supply delivery times can be adjusted in the config.
+         - Updated bridge to include a more modular AddMoney/RemoveMoney/*HasMoney functions
+            * NEW
+      Full Supply Flow:
+         - Open Tablet
+         - Select amount of an item for purchase
+         - Confirm (Does money checks/removes)
+         - Items are delivered to supply shop
+   - Players can track/cancel orders in the tablets
