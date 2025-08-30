@@ -1,24 +1,15 @@
-LOG RESET - Aug 24, 2025
+LOG RESET - 8/29/2025
+-----------------------------------------------
+To-Do: Item Images
 
-- I have waited long enough troubleshooting the library. The oil script will still utilize ox-lib however will feature multi inventory support and will be a complete script.
-   Eventually I will implement the library. I am ready to release 1.0 just as much as anyone else but without a fully functional library I do not want to implement it in my scripts.
-   Please be patient as I round out Fiji-Oil to V1.0 with Multi-inventory support, optimized collection, refining, packaging and deliver missions.
+Planned( V1.5 ):
+   Quality
+      * An in house quality system will be presented as many supported inventory scripts do not support metadata.
+   Contracts/Reputation System
+      * This will redefine the delivery system. Instead of the a simple A-B system players will obtain a tablet to accept contracts for deliveries. Upon failing or completing a contract the players reputation 
+         will be updated accordingly. The reputaion system will affect various aspects of the contract system. (Pay out, contract times, etc..)
+   Refinery 2.0
+      * Refining Panel to be removed and added to the tablet. Refining statuses such as hopper count, distillation and collection will be handled in the tablet.
+         - Distillation will now feature a minigame -- Thermal Balance
 
-
--- OxLib is required. Progress Bars, Context Menus, Input Menus. 
-
-
-
-- Collection
-   - Valve - Same operation as before. Open the valve and a random collection zone is selected.
-      - Valve Timer is now in minutes and changes to seconds.
-      - Upon opening the valve a gps waypoint is already selected on the players map
-- Refine
-   - Automated hopper loading, distilling, extraction 
-   - Allow cancelling of each phase
-   - Better tracking of each phase
-   - Byproducts added upon extraction
-- [NEW] Packaging
-   - Use your refined oil buckets and empty drums to create packaged oil drums for deliveries
-- [NEW] Deliveries
-   
+-- More to come.. 
