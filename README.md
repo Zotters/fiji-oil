@@ -690,6 +690,15 @@ For support, use [Issues](https://github.com/Zotters/fiji-oil/issues)
 ![](https://i.ibb.co/HDpjnrPK/image.png)
 ![](https://i.ibb.co/HTr94ybk/image.png)
 
+```
+Tablet; Contracts | Refinery | Store | Reputation | Bonuses
+		Contract will replace deliveries
+		Refinery will contain Valve Status, Hopper Status, Distallation Status, Packagaing Status
+		Store will contain Field Supplies and Enhancements
+		Reputation will contain reputations across oil companies
+		Bonuses will show current bonuses
+```
+
 ## Credits
 
 - Created by Zotters
