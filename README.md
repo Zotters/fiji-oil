@@ -686,7 +686,7 @@ For support, use [Issues](https://github.com/Zotters/fiji-oil/issues)
 		}
 	},
 ```
-## Coming Soon
+## Coming Soon 2.0
 ![](https://i.ibb.co/HDpjnrPK/image.png)
 ![](https://i.ibb.co/HTr94ybk/image.png)
 
@@ -697,6 +697,9 @@ Tablet; Contracts | Refinery | Store | Reputation | Bonuses
 		Store will contain Field Supplies and Enhancements
 		Reputation will contain reputations across oil companies
 		Bonuses will show current bonuses
+Goals;
+	- Remove Item Bloat (in-script quality system)
+	- Redesign the refinery process
 ```
 
 ## Credits
