@@ -57,7 +57,7 @@ function Fiji.HasItem(source, item, amount)
         local item = Player.Functions.GetItemByName(item)
         return item and item.amount >= amount, item and item.amount or 0
     elseif Inventory == 'qs' then
-        local count = exports['qs-inventory']:GetItemAmount(source, item)
+        local count = exports['qs-inventory']:GetItemTotalAmount(source, item)
         return count >= amount, count
     elseif Inventory == 'esx' then
         local ESX = exports['es_extended']:getSharedObject()
