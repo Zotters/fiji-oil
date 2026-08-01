@@ -13,6 +13,7 @@ Drill crude at sea, refine and package it on land, then sell or contract it out 
 ![ox_lib](https://img.shields.io/badge/ox__lib-not%20required-3ecf8e?style=for-the-badge&labelColor=0b1d2a)
 ![Frameworks](https://img.shields.io/badge/frameworks-QBCore%20%7C%20QBX%20%7C%20ESX-e8f1f5?style=for-the-badge&labelColor=0b1d2a)
 ![License](https://img.shields.io/badge/license-GPL--3.0-8ba3b0?style=for-the-badge&labelColor=0b1d2a)
+![Issues](https://img.shields.io/github/issues/Zotters/fiji-oil?style=for-the-badge&labelColor=0b1d2a&color=e5484d)
 
 </div>
 
