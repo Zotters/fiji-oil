@@ -202,10 +202,10 @@ Ground-up redesign — almost nothing from 1.x survives unchanged.
 
 <div align="center">
 
-Made with care by **Zotters**
+Made with ❤️ by  **Zotters**
 
 </div>
 ---
 
-Made with ❤️ by Zotters
+
 
