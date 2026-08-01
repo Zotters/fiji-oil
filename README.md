@@ -1,4 +1,4 @@
-![](https://i.ibb.co/YTKXfNVK/Fiji-Oil20.png)
+![](https://github.com/Zotters/fiji-oil/blob/main/Fiji20.png)
 
 # Fiji Oil V2.0.0
 
