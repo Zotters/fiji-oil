@@ -2,7 +2,7 @@
 
 # Fiji Oil V2.0.0
 
-A complete offshore oil operation built for FiveM: drill crude at sea, refine and package it on land, then sell or contract it out to one of four companies, each with its own reputation track and perks. Every screen is a custom-built, sleek industrial UI - no ox_lib UI anywhere in this script.
+A complete offshore oil operation built for FiveM: drill crude at sea, refine and package it on land, then sell or contract it out to one of four companies, each with its own reputation track and perks. Every screen is a custom-built, sleek industrial UI.
 
 ## Features
 
