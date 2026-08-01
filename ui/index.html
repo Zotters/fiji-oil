@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>[FIJI-OIL]</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="notify-container"></div>
+
+  <div id="text-ui" class="hidden">
+    <span id="text-ui-icon"></span>
+    <span id="text-ui-label"></span>
+    <kbd>E</kbd>
+  </div>
+
+  <div id="progress-container" class="hidden">
+    <div class="progress-label" id="progress-label"></div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <div id="countdown-hud" class="hidden">
+    <div class="countdown-label" id="countdown-label">Timer</div>
+    <div class="timer-circle">
+      <svg viewBox="0 0 100 100">
+        <circle class="track" cx="50" cy="50" r="45" />
+        <circle class="fill" id="countdown-fill" cx="50" cy="50" r="45" />
+      </svg>
+      <div class="timer-text" id="countdown-text">00:00</div>
+    </div>
+  </div>
+
+  <div id="context-menu" class="overlay hidden">
+    <div class="panel context-panel">
+      <div class="panel-header">
+        <span id="context-title"></span>
+        <button class="close-btn" data-close="context">&times;</button>
+      </div>
+      <div class="panel-body" id="context-options"></div>
+    </div>
+  </div>
+
+  <div id="input-modal" class="overlay hidden">
+    <div class="panel input-panel">
+      <div class="panel-header">
+        <span id="input-title"></span>
+        <button class="close-btn" data-close="input">&times;</button>
+      </div>
+      <div class="panel-body" id="input-fields"></div>
+      <div class="panel-footer">
+        <button class="btn ghost" id="input-cancel">Cancel</button>
+        <button class="btn primary" id="input-submit">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="terminal" class="overlay hidden">
+    <div class="terminal-shell">
+      <div class="hazard-bar"></div>
+      <div class="terminal-body">
+        <div class="terminal-sidebar">
+          <div class="terminal-brand">GLOBE OIL<br><span>TERMINAL</span></div>
+          <nav class="terminal-tabs">
+            <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+            <button class="tab-btn" data-tab="supplies">Supplies</button>
+            <button class="tab-btn" data-tab="contracts">Contracts</button>
+            <button class="tab-btn" data-tab="reputation">Reputation</button>
+          </nav>
+          <button class="btn ghost terminal-close" data-close="terminal">Close Terminal</button>
+        </div>
+        <div class="terminal-main">
+          <section id="tab-dashboard" class="tab-content active"></section>
+          <section id="tab-supplies" class="tab-content"></section>
+          <section id="tab-contracts" class="tab-content"></section>
+          <section id="tab-reputation" class="tab-content"></section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

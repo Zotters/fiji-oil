@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/Zotters/fiji-oil/blob/main/Fiji20.png" alt="Fiji Oil" width="100%"/>
+<img src="https://i.ibb.co/YTKXfNVK/Fiji-Oil20.png" alt="Fiji Oil" width="100%"/>
 
 # Fiji Oil — V2.0.0
 
@@ -31,6 +31,7 @@ Drill crude at sea, refine and package it on land, then sell or contract it out 
 - [The Terminal](#the-terminal)
 - [Items](#items)
 - [Commands](#commands)
+- [Reporting Bugs](#reporting-bugs)
 - [Credits](#credits)
 - [Version History](#version-history)
 
@@ -162,6 +163,17 @@ QBCore, QBX Core, and ESX are wired up automatically — no extra config needed 
 
 None currently — all interaction is through the Terminal and physical world interactions.
 
+## Reporting Bugs
+
+Found a bug? Open an issue here: **[github.com/Zotters/fiji-oil/issues](https://github.com/Zotters/fiji-oil/issues)**
+
+To help track it down faster, please include:
+
+- Your framework, inventory, and target system (e.g. QBX Core / ox_inventory / ox_target)
+- Steps to reproduce
+- Any errors from the server console or the client F8 console
+- Whether `shared/config.lua` has been changed from the defaults
+
 ## Credits
 
 - Created by Zotters
@@ -203,10 +215,6 @@ Ground-up redesign — almost nothing from 1.x survives unchanged.
 
 <div align="center">
 
-Made with ❤️ by  **Zotters**
+Made with care by **Zotters**
 
 </div>
----
-
-
-
