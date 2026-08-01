@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://i.ibb.co/YTKXfNVK/Fiji-Oil20.png" alt="Fiji Oil" width="100%"/>
+<img src="https://github.com/Zotters/fiji-oil/blob/main/Fiji20.png" alt="Fiji Oil" width="100%"/>
 
 # Fiji Oil — V2.0.0
 
