@@ -1,716 +1,136 @@
+![](https://i.ibb.co/YTKXfNVK/Fiji-Oil20.png)
 
+# Fiji Oil V2.0.0
 
-![](https://github.com/Zotters/fiji-oil/blob/main/Fiji20.png)  
+A complete offshore oil operation built for FiveM: drill crude at sea, refine and package it on land, then sell or contract it out to one of four companies, each with its own reputation track and perks. Every screen is a custom-built, sleek industrial UI - no ox_lib UI anywhere in this script.
 
 ## Features
 
-- **Complete Oil Production Chain**
-  - Extract crude oil from pumps
-  - Refine crude oil into various grades
-  - Package refined oil for delivery
-  - Deliver packaged oil for profit
+- **Offshore drilling** - rent a boat, sail out to a rig, and drill for light or heavy crude
+- **Boat rentals** - multiple tiers, timed, with a partial refund for early returns
+- **The Globe Oil Terminal** - a single handheld device for everything: supplies, contracts, and reputation
+- **Supply orders** - order buckets, drill parts, and drums; they take real time to arrive and are picked up at whichever unlocked HQ you choose
+- **Four companies, four personalities** - Globe Oil (neutral base), Kraken Deepwater (drilling), Meridian Refineries (refining), Blackgold Traders (commerce), each with independent, stacking reputation and perks
+- **Contracts** - a repeatable job board per company, worked entirely through the Terminal, paying cash + reputation
+- **Full refining chain** - hopper, distillation, and extraction, producing pure/standard/dirty grades with a chance of byproducts
+- **Packaging** - convert refined oil into sellable drums; unpackaged refined oil is left alone as a plain item, ready for a future crafting system to consume
+- **Sleek industrial custom UI** - toasts, progress bars, text prompts, context menus, input dialogs, circular countdowns, and the full 4-tab Terminal app, all hand-built (no ox_lib UI, no ox_lib dependency at all)
+- **Every framework, every inventory, every target system** - QBCore, QBX Core, and ESX; ox_inventory, qb-inventory, qs-inventory, and ESX's built-in inventory; ox_target, qb-target, qtarget, or proximity interactions with zero target resource installed
+- **Persistent** - reputation, contracts, and supply orders survive restarts (oxmysql-backed)
 
-- **Dynamic Oil Extraction**
-  - Open valves at oil pumps
-  - Random oil types (light/heavy crude)
-  - Timed collection points
-  - Visual indicators and map markers
+## Framework / Inventory / Target support
 
-- **Advanced Refinery System**
-  - Multi-stage refining process
-  - Load crude oil into hoppers
-  - Distillation process
-  - Extract refined products
-  - Quality-based outcomes (pure, standard, dirty)
-  - Chance for byproducts
+Detected automatically at resource start, independently for each concern:
 
-- **Oil Packaging**
-  - Convert refined oil into transportable products
-  - Requires empty drums
-  - Multiple oil grades and types
-
-- **Delivery System**
-  - Random delivery locations
-  - Custom delivery vehicles with keys
-  - Time-based bonus rewards
-  - Smart vehicle spawning system
-
-- **Sleek UI Elements**
-  - Circular timers for valves and deliveries
-  - Refinery control panel
-  - Progress indicators
-
-- **Framework Support**
-  - QBCore / QBX Core
-  - ESX
-  - ox_inventory
-  - qs-inventory
-  - Automatic framework detection
-
-- **Developer-Friendly**
-  - Highly configurable
-  - Well-documented code
-  - Easy to extend
+- **Framework** (money, identifiers): QBCore, QBX Core, ESX
+- **Inventory** (items): ox_inventory, qb-inventory, qs-inventory, ESX's built-in inventory
+- **Target** (interactions): ox_target, qb-target, qtarget, or proximity + on-screen prompt if none are installed
 
 ## Dependencies
 
-- [ox_lib](https://github.com/overextended/ox_lib)
-- [ox_target](https://github.com/overextended/ox_target)
+- [oxmysql](https://github.com/overextended/oxmysql) - required, stores reputation, contracts, and supply orders
+- One of the inventory systems listed above
+- Optionally one of the target systems listed above (falls back to proximity interactions otherwise)
 
 ## Installation
 
-1. Ensure you have the required dependencies installed
-2. Download the latest release from [GitHub](https://github.com/Zotters/fiji-oil/releases)
-3. Extract the files to your server's resources folder
-4. Add `ensure fiji-oil` to your server.cfg
-5. Configure the settings in `config.lua` to your liking
-6. Restart your server
+1. Install oxmysql if you don't already have it.
+2. Import `sql/fiji_oil.sql` into your database (the resource will also try to create these tables itself on first start as a safety net, but importing manually first is recommended).
+3. Add the items listed below to your inventory system.
+4. Drop this resource into your `resources` folder and add `ensure fiji-oil` to your `server.cfg`.
+5. Open `config.lua` and adjust locations, prices, contracts, and perk tiers to fit your server. Every location in the default config is a placeholder - retune it to your map.
 
-## Configuration
+## The loop
 
-The script is highly configurable through the `config.lua` file. You can adjust:
+1. **Get a Terminal.** Visit Globe Oil HQ and register at the kiosk to receive a Globe Oil Terminal (`globe_oil_terminal`). Use the item any time to open it.
+2. **Order supplies.** From the Terminal's Supplies tab, order oil buckets, drill parts, and empty drums from any company you've unlocked. Orders take real time and are picked up at the HQ you chose as drop-off.
+3. **Rent a boat** at the Globe Oil Marina and head out to one of the offshore rigs.
+4. **Drill** for crude oil (light or heavy, weighted random) - each unit consumes one oil bucket and some of a drill part's charges.
+5. **Refine** at the Globe Oil refinery: load the hopper, distill, then extract. Yields pure/standard/dirty grades with a chance of byproducts.
+6. **Package** the refined oil into drums.
+7. **Sell** packaged oil directly at any unlocked company's trade desk, or **fulfill a contract** through the Terminal for a bigger payout and reputation.
 
-- Oil pump locations
-- Refinery settings
-- Packaging requirements
-- Delivery locations and rewards
-- Time bonuses
-- Vehicle models
-- Item requirements
-- And much more!
+## Companies
+
+- **Globe Oil** - the neutral base company. Always unlocked, no perk bias. Reach 25% reputation with them to unlock the other three.
+- **Kraken Deepwater** - drilling specialists. Perk: faster drilling, chance of bonus crude per unit.
+- **Meridian Refineries** - refining specialists. Perk: faster refining, better odds of "pure" grade.
+- **Blackgold Traders** - commerce specialists. Perk: better sell prices, bigger contract reputation payouts.
+
+Perks apply per-company and contextually - there's no need to pick one company as your "employer." Selling to Blackgold gets Blackgold's price perk regardless of your standing elsewhere. Reputation is earned by fulfilling that company's contracts (large gain) and by selling to them directly (small gain per unit).
+
+## The Terminal
+
+One custom NUI app, four tabs:
+
+- **Dashboard** - every company's reputation at a glance, active supply orders with live countdowns, active contract summaries
+- **Supplies** - browse each unlocked company's catalog and place timed orders
+- **Contracts** - accept, track, fulfill, or abandon each company's job board (capped concurrent contracts per company)
+- **Reputation** - detailed per-company standing, unlocked/locked perk tiers, and progress toward Globe Oil's unlock-everyone-else threshold
 
 ## Items
 
-The following items are used by the script:
+| Item | Description |
+|---|---|
+| `globe_oil_terminal` | The device - opens the Terminal UI |
+| `oil_bucket` | Consumed per unit of crude collected while drilling |
+| `drill_part` | Has limited charges before it breaks (`Config.DrillPartMaxUses`) |
+| `crude_light` / `crude_heavy` | Raw crude, drilled offshore |
+| `refined_light_pure` / `_standard` / `_dirty`, `refined_heavy_pure` / `_standard` / `_dirty` | Refined output |
+| `empty_drum` | Needed to package refined oil |
+| `packaged_light_pure` / `_standard` / `_dirty`, `packaged_heavy_pure` / `_standard` / `_dirty` | Final sellable/contractable product |
+| `plastic_residue`, `sulfur_chunk` | Refining byproducts |
 
-- `empty_oil` - Empty oil container
-- `crude_light` - Light crude oil
-- `crude_heavy` - Heavy crude oil
-- `refined_light_pure` - Pure refined light oil
-- `refined_light_standard` - Standard refined light oil
-- `refined_light_dirty` - Dirty refined light oil
-- `refined_heavy_pure` - Pure refined heavy oil
-- `refined_heavy_standard` - Standard refined heavy oil
-- `refined_heavy_dirty` - Dirty refined heavy oil
-- `empty_drum` - Empty oil drum
-- `packaged_light_pure` - Packaged pure light oil
-- `packaged_light_standard` - Packaged standard light oil
-- `packaged_light_dirty` - Packaged dirty light oil
-- `packaged_heavy_pure` - Packaged pure heavy oil
-- `packaged_heavy_standard` - Packaged standard heavy oil
-- `packaged_heavy_dirty` - Packaged dirty heavy oil
+Icons for the crude/refined/packaged/drum items are in `inventory/web/images/`. `globe_oil_terminal` and `drill_part` need icons added - `oil_bucket` can reuse `empty_oil.png` if you don't have a replacement yet.
 
-You'll need to add these items to your inventory system.
+### ox_inventory usable item
 
-## Usage
+ox_inventory doesn't let a resource register item usability at runtime. Add this to the `globe_oil_terminal` entry in your `ox_inventory` `data/items.lua`:
 
-### Oil Extraction
-1. Approach an oil pump
-2. Open the valve
-3. Go to the marked collection point
-4. Collect oil using empty containers
+```lua
+['globe_oil_terminal'] = {
+    label = 'Globe Oil Terminal',
+    weight = 500,
+    stack = false,
+    close = true,
+    client = { export = 'fiji-oil.globe_oil_terminal' }
+}
+```
 
-### Oil Refining
-1. Take your crude oil to the refinery
-2. Load the crude oil into the hopper
-3. Start the distillation process
-4. Extract the refined oil
-
-### Oil Packaging
-1. Take your refined oil to the packaging station
-2. Use empty drums to package the oil
-3. Package the oil for delivery
-
-### Oil Delivery
-1. Take your packaged oil to the delivery office
-2. Select the oil type and quantity to deliver
-3. Drive the delivery vehicle to the destination
-4. Complete the delivery to receive payment
+QBCore, QBX Core, and ESX are wired up automatically - no extra config needed for those.
 
 ## Commands
 
-- `/canceldelivery` - Cancel your current delivery and return the oil
-
-## Screenshots
-
-**Coming soon**
-
-## Support
-
-For support, use [Issues](https://github.com/Zotters/fiji-oil/issues)
-
-## Items
-<details>
-  <summary>QBCore Items</summary>
-  
-  ```lua
-  ['empty_oil'] = {
-      ['name'] = 'empty_oil',
-      ['label'] = 'Empty Oil Container',
-      ['weight'] = 1000,
-      ['type'] = 'item',
-      ['image'] = 'empty_oil.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'An empty container for collecting crude oil'
-  },
-  ['crude_light'] = {
-      ['name'] = 'crude_light',
-      ['label'] = 'Light Crude Oil',
-      ['weight'] = 2000,
-      ['type'] = 'item',
-      ['image'] = 'crude_light.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Unrefined light crude oil'
-  },
-  ['crude_heavy'] = {
-      ['name'] = 'crude_heavy',
-      ['label'] = 'Heavy Crude Oil',
-      ['weight'] = 2500,
-      ['type'] = 'item',
-      ['image'] = 'crude_heavy.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Unrefined heavy crude oil'
-  },
-  ['refined_light_pure'] = {
-      ['name'] = 'refined_light_pure',
-      ['label'] = 'Pure Light Oil',
-      ['weight'] = 1800,
-      ['type'] = 'item',
-      ['image'] = 'refined_light_pure.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'High-quality refined light oil'
-  },
-  ['refined_light_standard'] = {
-      ['name'] = 'refined_light_standard',
-      ['label'] = 'Standard Light Oil',
-      ['weight'] = 1800,
-      ['type'] = 'item',
-      ['image'] = 'refined_light_standard.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Standard-quality refined light oil'
-  },
-  ['refined_light_dirty'] = {
-      ['name'] = 'refined_light_dirty',
-      ['label'] = 'Dirty Light Oil',
-      ['weight'] = 1800,
-      ['type'] = 'item',
-      ['image'] = 'refined_light_dirty.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Low-quality refined light oil'
-  },
-  ['refined_heavy_pure'] = {
-      ['name'] = 'refined_heavy_pure',
-      ['label'] = 'Pure Heavy Oil',
-      ['weight'] = 2200,
-      ['type'] = 'item',
-      ['image'] = 'refined_heavy_pure.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'High-quality refined heavy oil'
-  },
-  ['refined_heavy_standard'] = {
-      ['name'] = 'refined_heavy_standard',
-      ['label'] = 'Standard Heavy Oil',
-      ['weight'] = 2200,
-      ['type'] = 'item',
-      ['image'] = 'refined_heavy_standard.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Standard-quality refined heavy oil'
-  },
-  ['refined_heavy_dirty'] = {
-      ['name'] = 'refined_heavy_dirty',
-      ['label'] = 'Dirty Heavy Oil',
-      ['weight'] = 2200,
-      ['type'] = 'item',
-      ['image'] = 'refined_heavy_dirty.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Low-quality refined heavy oil'
-  },
-  ['empty_drum'] = {
-      ['name'] = 'empty_drum',
-      ['label'] = 'Empty Oil Drum',
-      ['weight'] = 1500,
-      ['type'] = 'item',
-      ['image'] = 'empty_drum.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'An empty drum for packaging refined oil'
-  },
-  ['packaged_light_pure'] = {
-      ['name'] = 'packaged_light_pure',
-      ['label'] = 'Packaged Pure Light Oil',
-      ['weight'] = 3000,
-      ['type'] = 'item',
-      ['image'] = 'packaged_light_pure.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'High-quality light oil ready for delivery'
-  },
-  ['packaged_light_standard'] = {
-      ['name'] = 'packaged_light_standard',
-      ['label'] = 'Packaged Standard Light Oil',
-      ['weight'] = 3000,
-      ['type'] = 'item',
-      ['image'] = 'packaged_light_standard.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Standard-quality light oil ready for delivery'
-  },
-  ['packaged_light_dirty'] = {
-      ['name'] = 'packaged_light_dirty',
-      ['label'] = 'Packaged Dirty Light Oil',
-      ['weight'] = 3000,
-      ['type'] = 'item',
-      ['image'] = 'packaged_light_dirty.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Low-quality light oil ready for delivery'
-  },
-  ['packaged_heavy_pure'] = {
-      ['name'] = 'packaged_heavy_pure',
-      ['label'] = 'Packaged Pure Heavy Oil',
-      ['weight'] = 3500,
-      ['type'] = 'item',
-      ['image'] = 'packaged_heavy_pure.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'High-quality heavy oil ready for delivery'
-  },
-  ['packaged_heavy_standard'] = {
-      ['name'] = 'packaged_heavy_standard',
-      ['label'] = 'Packaged Standard Heavy Oil',
-      ['weight'] = 3500,
-      ['type'] = 'item',
-      ['image'] = 'packaged_heavy_standard.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Standard-quality heavy oil ready for delivery'
-  },
-  ['packaged_heavy_dirty'] = {
-      ['name'] = 'packaged_heavy_dirty',
-      ['label'] = 'Packaged Dirty Heavy Oil',
-      ['weight'] = 3500,
-      ['type'] = 'item',
-      ['image'] = 'packaged_heavy_dirty.png',
-      ['unique'] = false,
-      ['useable'] = false,
-      ['shouldClose'] = false,
-      ['combinable'] = nil,
-      ['description'] = 'Low-quality heavy oil ready for delivery'
-  },
-```
-</details>
-
-<details> <summary>ESX Items</summary> 
-	
-```lua
-	['empty_oil'] = {
-    ['name'] = 'empty_oil',
-    ['label'] = 'Empty Oil Container',
-    ['weight'] = 1000,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'empty_oil.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'An empty container for collecting crude oil'
-},
-['crude_light'] = {
-    ['name'] = 'crude_light',
-    ['label'] = 'Light Crude Oil',
-    ['weight'] = 2000,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'crude_light.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Unrefined light crude oil'
-},
-['crude_heavy'] = {
-    ['name'] = 'crude_heavy',
-    ['label'] = 'Heavy Crude Oil',
-    ['weight'] = 2500,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'crude_heavy.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Unrefined heavy crude oil'
-},
-['refined_light_pure'] = {
-    ['name'] = 'refined_light_pure',
-    ['label'] = 'Pure Light Oil',
-    ['weight'] = 1800,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'refined_light_pure.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'High-quality refined light oil'
-},
-['refined_light_standard'] = {
-    ['name'] = 'refined_light_standard',
-    ['label'] = 'Standard Light Oil',
-    ['weight'] = 1800,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'refined_light_standard.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Standard-quality refined light oil'
-},
-['refined_light_dirty'] = {
-    ['name'] = 'refined_light_dirty',
-    ['label'] = 'Dirty Light Oil',
-    ['weight'] = 1800,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'refined_light_dirty.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Low-quality refined light oil'
-},
-['refined_heavy_pure'] = {
-    ['name'] = 'refined_heavy_pure',
-    ['label'] = 'Pure Heavy Oil',
-    ['weight'] = 2200,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'refined_heavy_pure.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'High-quality refined heavy oil'
-},
-['refined_heavy_standard'] = {
-    ['name'] = 'refined_heavy_standard',
-    ['label'] = 'Standard Heavy Oil',
-    ['weight'] = 2200,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'refined_heavy_standard.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Standard-quality refined heavy oil'
-},
-['refined_heavy_dirty'] = {
-    ['name'] = 'refined_heavy_dirty',
-    ['label'] = 'Dirty Heavy Oil',
-    ['weight'] = 2200,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'refined_heavy_dirty.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Low-quality refined heavy oil'
-},
-['empty_drum'] = {
-    ['name'] = 'empty_drum',
-    ['label'] = 'Empty Oil Drum',
-    ['weight'] = 1500,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'empty_drum.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'An empty drum for packaging refined oil'
-},
-['packaged_light_pure'] = {
-    ['name'] = 'packaged_light_pure',
-    ['label'] = 'Packaged Pure Light Oil',
-    ['weight'] = 3000,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'packaged_light_pure.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'High-quality light oil ready for delivery'
-},
-['packaged_light_standard'] = {
-    ['name'] = 'packaged_light_standard',
-    ['label'] = 'Packaged Standard Light Oil',
-    ['weight'] = 3000,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'packaged_light_standard.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Standard-quality light oil ready for delivery'
-},
-['packaged_light_dirty'] = {
-    ['name'] = 'packaged_light_dirty',
-    ['label'] = 'Packaged Dirty Light Oil',
-    ['weight'] = 3000,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'packaged_light_dirty.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Low-quality light oil ready for delivery'
-},
-['packaged_heavy_pure'] = {
-    ['name'] = 'packaged_heavy_pure',
-    ['label'] = 'Packaged Pure Heavy Oil',
-    ['weight'] = 3500,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'packaged_heavy_pure.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'High-quality heavy oil ready for delivery'
-},
-['packaged_heavy_standard'] = {
-    ['name'] = 'packaged_heavy_standard',
-    ['label'] = 'Packaged Standard Heavy Oil',
-    ['weight'] = 3500,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'packaged_heavy_standard.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Standard-quality heavy oil ready for delivery'
-},
-['packaged_heavy_dirty'] = {
-    ['name'] = 'packaged_heavy_dirty',
-    ['label'] = 'Packaged Dirty Heavy Oil',
-    ['weight'] = 3500,
-    ['rare'] = 0,
-    ['can_remove'] = 1,
-    ['type'] = 'item',
-    ['image'] = 'packaged_heavy_dirty.png',
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = false,
-    ['description'] = 'Low-quality heavy oil ready for delivery'
-},
-```
-
-</details> <details> <summary>ox_inventory Items</summary>
-	
-```lua
-		['empty_oil'] = {
-		    label = 'Empty Oil Container',
-		    weight = 1000,
-		    stack = true,
-		    close = false,
-		    description = 'An empty container for collecting crude oil'
-		},
-		['crude_light'] = {
-		    label = 'Light Crude Oil',
-		    weight = 2000,
-		    stack = true,
-		    close = false,
-		    description = 'Unrefined light crude oil'
-		},
-		['crude_heavy'] = {
-		    label = 'Heavy Crude Oil',
-		    weight = 2500,
-		    stack = true,
-		    close = false,
-		    description = 'Unrefined heavy crude oil'
-		},
-		['refined_light_pure'] = {
-		    label = 'Pure Light Oil',
-		    weight = 1800,
-		    stack = true,
-		    close = false,
-		    description = 'High-quality refined light oil'
-		},
-		['refined_light_standard'] = {
-		    label = 'Standard Light Oil',
-		    weight = 1800,
-		    stack = true,
-		    close = false,
-		    description = 'Standard-quality refined light oil'
-		},
-		['refined_light_dirty'] = {
-		    label = 'Dirty Light Oil',
-		    weight = 1800,
-		    stack = true,
-		    close = false,
-		    description = 'Low-quality refined light oil'
-		},
-		['refined_heavy_pure'] = {
-		    label = 'Pure Heavy Oil',
-		    weight = 2200,
-		    stack = true,
-		    close = false,
-		    description = 'High-quality refined heavy oil'
-		},
-		['refined_heavy_standard'] = {
-		    label = 'Standard Heavy Oil',
-		    weight = 2200,
-		    stack = true,
-		    close = false,
-		    description = 'Standard-quality refined heavy oil'
-		},
-		['refined_heavy_dirty'] = {
-		    label = 'Dirty Heavy Oil',
-		    weight = 2200,
-		    stack = true,
-		    close = false,
-		    description = 'Low-quality refined heavy oil'
-		},
-		['empty_drum'] = {
-		    label = 'Empty Oil Drum',
-		    weight = 1500,
-		    stack = true,
-		    close = false,
-		    description = 'An empty drum for packaging refined oil'
-		},
-		['packaged_light_pure'] = {
-		    label = 'Packaged Pure Light Oil',
-		    weight = 3000,
-		    stack = true,
-		    close = false,
-		    description = 'High-quality light oil ready for delivery'
-		},
-		['packaged_light_standard'] = {
-		    label = 'Packaged Standard Light Oil',
-		    weight = 3000,
-		    stack = true,
-		    close = false,
-		    description = 'Standard-quality light oil ready for delivery'
-		},
-		['packaged_light_dirty'] = {
-		    label = 'Packaged Dirty Light Oil',
-		    weight = 3000,
-		    stack = true,
-		    close = false,
-		    description = 'Low-quality light oil ready for delivery'
-		},
-		['packaged_heavy_pure'] = {
-		    label = 'Packaged Pure Heavy Oil',
-		    weight = 3500,
-		    stack = true,
-		    close = false,
-		    description = 'High-quality heavy oil ready for delivery'
-		},
-		['packaged_heavy_standard'] = {
-		    label = 'Packaged Standard Heavy Oil',
-		    weight = 3500,
-		    stack = true,
-		    close = false,
-		    description = 'Standard-quality heavy oil ready for delivery'
-		},
-		['packaged_heavy_dirty'] = {
-		    label = 'Packaged Dirty Heavy Oil',
-		    weight = 3500,
-		    stack = true,
-		    close = false,
-		    description = 'Low-quality heavy oil ready for delivery'
-		},
-```
-</details> 
-
-
-## Shops
-```lua
-	OilCompany = {
-		name = 'Los Santos Oil',
-		blip = {
-			id = 643, colour = 69, scale = 0.8
-		}, inventory = {
-			{ name = 'empty_oil', price = 35 }
-		}, locations = {
-			vec3(-41.36, -2148.09, 11.22)
-		}, targets = {
-			{ loc = vec3(-41.27, -2148.17, 10.89), length = 0.5, width = 3.0, heading = 270.0, minZ = 30.5, maxZ = 32.0, distance = 3 }
-		}
-	},
-```
-## Coming Soon 2.0
-![](https://i.ibb.co/HDpjnrPK/image.png)
-![](https://i.ibb.co/HTr94ybk/image.png)
-
-```
-Tablet; Contracts | Refinery | Store | Reputation | Bonuses
-		Contract will replace deliveries
-		Refinery will contain Valve Status, Hopper Status, Distallation Status, Packagaing Status
-		Store will contain Field Supplies and Enhancements
-		Reputation will contain reputations across oil companies
-		Bonuses will show current bonuses
-Goals;
-	- Remove Item Bloat (in-script quality system)
-	- Redesign the refinery process
-```
+None currently - all interaction is through the Terminal and physical world interactions.
 
 ## Credits
 
 - Created by Zotters
-- UI Design by Zotters
-- Special thanks to the FiveM community
+- UI design by Zotters
 
 ## Version History
 
+### 2.0.0
+
+Ground-up redesign - almost nothing from 1.x survives unchanged.
+
+- **New:** offshore drilling replaces land pumps/valves entirely
+- **New:** boat rentals (multiple tiers, timed, partial refund on early return)
+- **New:** the Globe Oil Terminal - a single device for supplies, contracts, and reputation
+- **New:** four companies with independent reputation, perks, and store catalogs
+- **New:** a repeatable contract system per company, replacing the old random-location delivery-truck missions
+- **New:** supply orders - timed, choose-your-HQ delivery instead of instant purchases
+- **New:** persistent storage (reputation/contracts/supply orders) - 1.x was entirely session-memory, DB-less
+- **New:** fully custom, sleek industrial UI kit (toasts, progress bars, text prompts, context menus, input dialogs, countdowns, the Terminal app) - ox_lib is no longer a dependency at all
+- **Kept:** the 3-phase hopper -> distill -> extract refinery and the drum-packaging step, both proven from 1.x, reskinned onto the new UI and hooked into Meridian's refining perk
+- **Fixed (carried over from the 1.x bridge audit):** framework/inventory conflation in money handling, silent failures on unsupported combos, and duplicated target/proximity interaction code are all resolved in the new `bridge.lua`
+
+### 1.0.1
+
+- Updated item images
+
 ### 1.0.0
+
 - Initial release
 - Complete oil production chain
 - Framework detection system
@@ -718,11 +138,6 @@ Goals;
 - Refinery with quality-based outcomes
 - Packaging system
 - Dynamic oil extraction
-
-### 1.0.1
-- Added multi-target support
-- Added script usage for non-target systems
-- Updated Bridge 
 
 ---
 
